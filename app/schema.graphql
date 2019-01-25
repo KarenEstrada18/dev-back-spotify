@@ -1,0 +1,79 @@
+type Query{
+    getTest: User
+    Users: [User]
+    User(id:ID): User
+    Artists:[Artist]
+    Artist(name:String!):Artist
+    Albums:[Album]
+    Album(name:String!):Album
+    Songs:[Song]
+    Song(name:String!):Song
+}
+
+type Mutation{
+     signup(data:UserCreateInput) : Auth
+     login(email:String!, password:String!): Auth
+     updateUser(id:ID, data:UserUpdateInput) : User
+     deleteUser(id:ID):String
+}
+
+type Auth{
+	token:String
+	message:String
+}
+
+
+type User{
+    name:String
+    email:String
+    password:String
+    birth_date:String
+    gender:GENDER
+    is_active:Boolean
+}
+
+enum GENDER{
+    Male 
+    Female
+}
+
+type Artist{
+    name:String!
+    biography:String
+    galery:String
+    albums:[Album]
+}
+
+type Album{
+    name:String!
+    album_cover:String
+    year:String
+    songs:[Song]
+
+}
+
+type Song{
+    name:String!
+    artist:[Artist]
+    album_cover:[Album]
+    duration:String
+    url:String
+}
+
+input UserCreateInput{
+name:String
+email: String!
+password: String!
+birth_date: String
+gender: GENDER
+is_active: Boolean
+}
+
+input UserUpdateInput{
+    name:String
+    email: String!
+    password: String!
+    birth_date: String
+    gender: GENDER
+    is_active: Boolean
+}
