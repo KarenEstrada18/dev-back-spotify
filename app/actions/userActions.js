@@ -30,5 +30,6 @@ module.exports = {
 	createUser,
 	getUserByEmail,
 	getUserById,
-	updateUserById
+	updateUserById,
+	deleteUserById
 }

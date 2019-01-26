@@ -15,6 +15,16 @@ type Mutation{
      login(email:String!, password:String!): Auth
      updateUser(id:ID, data:UserUpdateInput) : User
      deleteUser(id:ID):String
+     createArtist(data:ArtistCreateInput) : Artist
+     updateArtist(data:ArtistUpdateInput) : Artist
+     deleteArtist(id:ID):String
+     createAlbum(data:AlbumCreateInput) : Album
+     updateAlbum(data:AlbumUpdateInput) : Album
+     deleteAlbum(id:ID): String
+     createSong(data:SongCreateInput) : Song
+     updateSong(data:SongUpdateInput) : Song
+     deleteSong(id:ID): String
+     
 }
 
 type Auth{
@@ -76,4 +86,49 @@ input UserUpdateInput{
     birth_date: String
     gender: GENDER
     is_active: Boolean
+}
+
+input ArtistCreateInput{
+    name:String!
+    biography:String
+    galery:String
+    albums:[Album]
+
+}
+
+input ArtistUpdateInput{
+    name:String
+    biography:String
+    galery:String
+    albums:[Album]
+}
+
+input AlbumCreateInput{
+    name:String
+    album_cover:String
+    year:Number
+    songs:[Song]
+}
+
+input AlbumUpdateInput{
+    name:String
+    album_cover:[Album]
+    year:Number
+    songs:[Song]
+}
+
+input SongCreateInput{
+    name:String
+    artists:[Artist]
+    album_cover:[Album]
+    duration:String
+    url:String
+}
+
+input SongUpdateInput{
+    name:String
+    artists:[Artist]
+    album_cover:[Album]
+    duration:String
+    url:String
 }
