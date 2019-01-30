@@ -25,4 +25,4 @@ mongoose.Types.ObjectId.prototype.valueOf = function () {
 	return this.toString();
 };
 
-module.exports = mongoose.model("artists", SubscriptionSchema);
+module.exports = mongoose.model("artists", ArtistSchema);

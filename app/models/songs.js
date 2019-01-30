@@ -11,7 +11,7 @@ const SongSchema = new Schema({
 		ref: "artists"
     },
     "album_cover":{
-        type:Schema.Types.ObjectId,
+        type:[Schema.Types.ObjectId],
         ref:"album"
     },
     "duration":{
@@ -26,4 +26,4 @@ mongoose.Types.ObjectId.prototype.valueOf = function () {
 	return this.toString();
 };
 
-module.exports = mongoose.model("songs", SubscriptionSchema);
+module.exports = mongoose.model("songs", SongSchema);

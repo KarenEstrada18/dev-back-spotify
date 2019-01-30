@@ -1,28 +1,34 @@
+scalar Upload
+
 type Query{
-    getTest: User
     Users: [User]
-    User(id:ID): User
+    UserName(name:String!): User
+    UserMail(email:String!): User
     Artists:[Artist]
-    Artist(name:String!):Artist
+    ArtistName(name:String!):Artist
     Albums:[Album]
-    Album(name:String!):Album
+    AlbumId(id:ID!):Album
+    AlbumName(name:String!):Album
     Songs:[Song]
-    Song(name:String!):Song
+    SongId(id:ID!):Song
+    SongName(name:String!):Song
 }
 
 type Mutation{
      signup(data:UserCreateInput) : Auth
      login(email:String!, password:String!): Auth
-     updateUser(id:ID, data:UserUpdateInput) : User
-     deleteUser(id:ID):String
+     updateUser(name:String!, data:UserUpdateInput) : User
+     deleteUser(name:String):String
      createArtist(data:ArtistCreateInput) : Artist
      updateArtist(data:ArtistUpdateInput) : Artist
      deleteArtist(id:ID):String
      createAlbum(data:AlbumCreateInput) : Album
      updateAlbum(data:AlbumUpdateInput) : Album
+     updateAlbumN(data:AlbumUpdateInput) : Album
      deleteAlbum(id:ID): String
      createSong(data:SongCreateInput) : Song
      updateSong(data:SongUpdateInput) : Song
+     updateSongN(data:SongUpdateInput) : Song
      deleteSong(id:ID): String
      
 }
@@ -40,6 +46,7 @@ type User{
     birth_date:String
     gender:GENDER
     is_active:Boolean
+    profile_image: String
 }
 
 enum GENDER{
@@ -54,12 +61,11 @@ type Artist{
     albums:[Album]
 }
 
-type Album{
+type Album {
     name:String!
     album_cover:String
     year:String
     songs:[Song]
-
 }
 
 type Song{
@@ -77,6 +83,7 @@ password: String!
 birth_date: String
 gender: GENDER
 is_active: Boolean
+profile_image: Upload
 }
 
 input UserUpdateInput{
@@ -92,43 +99,64 @@ input ArtistCreateInput{
     name:String!
     biography:String
     galery:String
-    albums:[Album]
-
+    albums:[albumInput]
 }
 
 input ArtistUpdateInput{
     name:String
     biography:String
     galery:String
-    albums:[Album]
+    albums:[albumInput]
+}
+
+input artistInput{
+    name:String!
+    biography:String
+    galery:String
+    albums:[albumInput]
 }
 
 input AlbumCreateInput{
     name:String
     album_cover:String
-    year:Number
-    songs:[Song]
+    year:Int
+    songs:[songInput]
 }
 
 input AlbumUpdateInput{
     name:String
-    album_cover:[Album]
-    year:Number
-    songs:[Song]
+    album_cover:[albumInput]
+    year:Int
+    songs:[songInput]
+}
+
+input albumInput{
+    name:String!
+    album_cover:String
+    year:String
+    songs:[songInput]
 }
 
 input SongCreateInput{
     name:String
-    artists:[Artist]
-    album_cover:[Album]
+    artists:[artistInput]
+    album_cover:[albumInput]
     duration:String
     url:String
 }
 
 input SongUpdateInput{
     name:String
-    artists:[Artist]
-    album_cover:[Album]
+    artists:[artistInput]
+    album_cover:[albumInput]
+    duration:String
+    url:String
+}
+
+input songInput{
+    name:String!
+    artist:[artistInput]
+    album_cover:[albumInput]
     duration:String
     url:String
 }

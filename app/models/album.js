@@ -24,4 +24,4 @@ const AlbumSchema = new Schema({
         return this.toString();
     };
     
-    module.exports = mongoose.model("album", SubscriptionSchema);
+    module.exports = mongoose.model("album", AlbumSchema);

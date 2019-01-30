@@ -10,7 +10,8 @@ const UserSchema = new Schema({
         type:String
     },
     "email":{
-        type:String
+        type:String,
+        unique:true
     },
     "password":{
         type:String
@@ -25,6 +26,9 @@ const UserSchema = new Schema({
     "is_active":{
         type:Boolean,
         default: true
+    },
+    "profile_image":{
+        type:String
     }
 },{ "collection": "users", "timestamps": true });
 
